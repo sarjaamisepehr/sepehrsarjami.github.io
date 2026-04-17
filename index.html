@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sepehr Sarjami — AI & Machine Learning</title>
+<meta name="description" content="Sepehr Sarjami — AI & Machine Learning engineer based in Milan." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #16110d;
+    --bg-soft:   #1e1813;
+    --bg-warm:   #241c15;
+    --ink:       #e8dcc6;
+    --ink-soft:  #c9b79a;
+    --ink-dim:   #8a7a63;
+    --ink-faint: #4e4337;
+    --amber:     #d4a574;
+    --amber-dim: #a67c4e;
+    --rust:      #8b6f47;
+    --line:      #2e2519;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* subtle paper-grain texture so it never feels flat */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.04  0 0 0 0 0.02  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* warm glow top-left, like lamplight */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -30vh;
+    left: -20vw;
+    width: 80vw;
+    height: 80vh;
+    background: radial-gradient(circle, rgba(212, 165, 116, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 7rem 2rem 6rem;
+  }
+
+  /* ---------- HEADER ---------- */
+  header { margin-bottom: 5rem; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--amber-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(3rem, 7vw, 4.5rem);
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 .accent {
+    font-style: italic;
+    color: var(--amber);
+    font-weight: 400;
+  }
+
+  .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+
+  .location {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--ink-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .location::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 8px var(--amber);
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section { margin-bottom: 4.5rem; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--amber-dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--line), transparent);
+  }
+
+  p { color: var(--ink-soft); margin-bottom: 1.25rem; }
+
+  p em {
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1em;
+    font-style: italic;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-block {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1.75rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 2;
+    color: var(--ink-soft);
+    position: relative;
+  }
+
+  .skills-block::before {
+    content: '~/skills';
+    position: absolute;
+    top: -0.6rem;
+    left: 1.5rem;
+    background: var(--bg);
+    padding: 0 0.6rem;
+    font-size: 0.7rem;
+    color: var(--amber-dim);
+  }
+
+  .skill-row { display: flex; gap: 1rem; }
+  .skill-key { color: var(--amber); min-width: 110px; }
+  .skill-val { color: var(--ink-soft); flex: 1; }
+
+  /* ---------- PROJECTS ---------- */
+  .projects { display: flex; flex-direction: column; gap: 0; }
+
+  .project {
+    display: block;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+    transition: padding-left 0.35s ease;
+  }
+
+  .project:first-child { border-top: 1px solid var(--line); }
+  .project:hover { padding-left: 1rem; }
+
+  .project-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--ink);
+    transition: color 0.25s ease;
+  }
+
+  .project:hover .project-title { color: var(--amber); }
+
+  .project-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .project-desc {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .experience-item { padding: 1.25rem 0; }
+  .experience-item + .experience-item { border-top: 1px solid var(--line); }
+
+  .exp-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .exp-company { color: var(--amber); font-style: italic; }
+
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-dim);
+    letter-spacing: 0.08em;
+  }
+
+  .exp-desc { color: var(--ink-soft); font-size: 0.95rem; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  .contact-grid a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-faint);
+    padding-bottom: 2px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .contact-grid a:hover {
+    color: var(--amber);
+    border-bottom-color: var(--amber);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--ink-dim);
+    font-size: 1rem;
+  }
+
+  footer .muted {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    margin-top: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 560px) {
+    main { padding: 4rem 1.5rem 4rem; }
+    .skills-block { padding: 1.5rem 1.25rem; font-size: 0.75rem; }
+    .skill-row { flex-direction: column; gap: 0; margin-bottom: 0.5rem; }
+    .skill-key { min-width: 0; }
+  }
+
+  /* gentle fade-in */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  header, section { animation: rise 0.9s ease-out both; }
+  section:nth-of-type(1) { animation-delay: 0.1s; }
+  section:nth-of-type(2) { animation-delay: 0.2s; }
+  section:nth-of-type(3) { animation-delay: 0.3s; }
+  section:nth-of-type(4) { animation-delay: 0.4s; }
+  section:nth-of-type(5) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<main>
+
+  <header>
+    <div class="eyebrow">— sepehr sarjami</div>
+    <h1>Building with <span class="accent">models</span>,<br/>writing <span class="accent">clean</span> code.</h1>
+    <p class="tagline">AI &amp; machine learning, quietly practiced.</p>
+    <div class="location">Milano, Italia · available for work</div>
+  </header>
+
+  <section>
+    <div class="section-label">about</div>
+    <p>
+      I work on bringing AI models into real codebases &mdash; finding the bottleneck, cutting the cost, making the whole thing a little lighter. Currently finishing my <em>Master's in Computer Science</em> at the Università degli Studi di Milano, with a background building production ML systems in Iran before moving to Italy.
+    </p>
+    <p>
+      I care about clean code, thoughtful optimization, and the quiet satisfaction of a model that runs 20% faster than it did yesterday. Continuous learning, oriented toward the vision of whoever I'm building for.
+    </p>
+  </section>
+
+  <section>
+    <div class="section-label">toolkit</div>
+    <div class="skills-block">
+      <div class="skill-row"><span class="skill-key">deep learning</span><span class="skill-val">pytorch · tensorflow · transformers · hugging face · llamaindex · rag</span></div>
+      <div class="skill-row"><span class="skill-key">ml</span><span class="skill-val">scikit-learn · supervised &amp; unsupervised · model evaluation</span></div>
+      <div class="skill-row"><span class="skill-key">data</span><span class="skill-val">time series · forecasting · churn · feature engineering · cleaning</span></div>
+      <div class="skill-row"><span class="skill-key">backend</span><span class="skill-val">fastapi · postgresql · docker · rest / json</span></div>
+      <div class="skill-row"><span class="skill-key">cloud</span><span class="skill-val">aws ec2 &amp; s3 · heroku · ubuntu</span></div>
+      <div class="skill-row"><span class="skill-key">languages</span><span class="skill-val">english (c1) · italiano (b1) · persian</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">selected work</div>
+    <div class="projects">
+
+      <a class="project" href="https://github.com/sarjaamisepehr/dep-rec" target="_blank" rel="noopener">
+        <div class="project-head">
+          <div class="project-title">dep-rec</div>
+          <div class="project-tag">audio · recognition</div>
+        </div>
+        <div class="project-desc">Depression detection through audio pattern recognition &mdash; built for the audio pattern recognition course.</div>
+      </a>
+
+      <a class="project" href="https://github.com/sarjaamisepehr/ML-Algorithms-Repo" target="_blank" rel="noopener">
+        <div class="project-head">
+          <div class="project-title">ML-Algorithms-Repo</div>
+          <div class="project-tag">notebooks</div>
+        </div>
+        <div class="project-desc">A growing notebook collection working through ML algorithms across different datasets &mdash; a quiet practice journal.</div>
+      </a>
+
+      <a class="project" href="https://github.com/sarjaamisepehr/User-Churn" target="_blank" rel="noopener">
+        <div class="project-head">
+          <div class="project-title">User-Churn</div>
+          <div class="project-tag">data science</div>
+        </div>
+        <div class="project-desc">Customer churn modeling on the Telco dataset &mdash; who stays, who leaves, and the features that tell you.</div>
+      </a>
+
+      <a class="project" href="https://github.com/sarjaamisepehr/Text-Summarization" target="_blank" rel="noopener">
+        <div class="project-head">
+          <div class="project-title">Text-Summarization</div>
+          <div class="project-tag">nlp</div>
+        </div>
+        <div class="project-desc">Summarization experiments in Python &mdash; compressing longer texts into the part that actually matters.</div>
+      </a>
+
+      <a class="project" href="https://github.com/sarjaamisepehr/Object-Detection" target="_blank" rel="noopener">
+        <div class="project-head">
+          <div class="project-title">Object-Detection</div>
+          <div class="project-tag">computer vision</div>
+        </div>
+        <div class="project-desc">Custom-trained object detection on a cat-and-dog dataset &mdash; a small model that knows exactly two things, well.</div>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">experience</div>
+
+    <div class="experience-item">
+      <div class="exp-head">
+        <div class="exp-role">AI Specialist · <span class="exp-company">Let's Talk</span></div>
+        <div class="exp-date">Mar — Jun 2023</div>
+      </div>
+      <div class="exp-desc">
+        Optimized user response times by ~20% and pushed model accuracy up 15% through clean coding, vectorization, and careful preprocessing of speech-to-text and text-to-speech pipelines. Built and deployed a FastAPI + PostgreSQL + Docker stack end-to-end on Ubuntu. Fine-tuned open-source models for specialized use cases.
+      </div>
+    </div>
+
+    <div class="experience-item">
+      <div class="exp-head">
+        <div class="exp-role">Research &amp; Development · <span class="exp-company">Saiwa (IS Lab)</span></div>
+        <div class="exp-date">Nov 2022 — Feb 2023</div>
+      </div>
+      <div class="exp-desc">
+        Competitor and market analysis across domestic and international markets. Scouted and adopted new technologies to sharpen the team's service offerings.
+      </div>
+    </div>
+
+    <div class="experience-item">
+      <div class="exp-head">
+        <div class="exp-role">AI Intern · <span class="exp-company">Saiwa (IS Lab)</span></div>
+        <div class="exp-date">Sep — Nov 2022</div>
+      </div>
+      <div class="exp-desc">
+        Image preprocessing and classification models. Trained custom object detection and voice recognition models targeted at Raspberry Pi 4 &mdash; tight hardware, tight code.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">elsewhere</div>
+    <div class="contact-grid">
+      <a href="mailto:sarjamisepehr@gmail.com">sarjamisepehr@gmail.com</a>
+      <a href="https://github.com/sarjaamisepehr" target="_blank" rel="noopener">github</a>
+      <a href="https://www.linkedin.com/in/sepehr-sarjami" target="_blank" rel="noopener">linkedin</a>
+      <a href="tel:+393515890620">+39 351 589 0620</a>
+    </div>
+  </section>
+
+  <footer>
+    made slowly, in milan.
+    <span class="muted">© 2026 · sepehr sarjami</span>
+  </footer>
+
+</main>
+
+</body>
+</html>
