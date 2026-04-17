@@ -5,7 +5,7 @@
 *AI & Machine Learning — Milan, Italy*
 
 [![Website](https://img.shields.io/badge/website-sarjaamisepehr.github.io-8B6F47?style=flat-square&labelColor=1a1410)](https://sarjaamisepehr.github.io)
-[![LinkedIn](https://img.shields.io/badge/linkedin-connect-8B6F47?style=flat-square&labelColor=1a1410&logo=linkedin&logoColor=D4A574)](https://www.linkedin.com/in/sepehr-sarjami)
+[![LinkedIn](https://img.shields.io/badge/linkedin-connect-8B6F47?style=flat-square&labelColor=1a1410&logo=linkedin&logoColor=D4A574)](https://www.linkedin.com/in/sepehr-sarjaami/)
 [![Email](https://img.shields.io/badge/email-sarjamisepehr%40gmail.com-8B6F47?style=flat-square&labelColor=1a1410&logo=gmail&logoColor=D4A574)](mailto:sarjamisepehr@gmail.com)
 
 </div>

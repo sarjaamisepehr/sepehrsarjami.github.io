@@ -10,17 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:        #16110d;
-    --bg-soft:   #1e1813;
-    --bg-warm:   #241c15;
-    --ink:       #e8dcc6;
-    --ink-soft:  #c9b79a;
-    --ink-dim:   #8a7a63;
-    --ink-faint: #4e4337;
-    --amber:     #d4a574;
-    --amber-dim: #a67c4e;
-    --rust:      #8b6f47;
-    --line:      #2e2519;
+    --bg:        #1a1419;   /* deep plum-black */
+    --bg-soft:   #241a23;   /* lifted plum */
+    --bg-warm:   #2d1f2a;
+    --ink:       #ede0c9;   /* warm cream */
+    --ink-soft:  #cdb89f;
+    --ink-dim:   #8a7668;
+    --ink-faint: #4e3f45;
+    --amber:     #e0a96d;   /* copper-amber */
+    --amber-dim: #b47e4d;
+    --rust:      #a6606a;   /* dusty rose-rust */
+    --line:      #322530;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,7 +47,7 @@
     pointer-events: none;
     z-index: 1;
     opacity: 0.35;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.04  0 0 0 0 0.02  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.07  0 0 0 0 0.04  0 0 0 0 0.06  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 
   /* warm glow top-left, like lamplight */
@@ -68,7 +68,7 @@
     z-index: 2;
     max-width: 720px;
     margin: 0 auto;
-    padding: 7rem 2rem 6rem;
+    padding: 5rem 2rem 6rem;
   }
 
   /* ---------- HEADER ---------- */
@@ -306,12 +306,92 @@
     letter-spacing: 0.1em;
   }
 
-  /* ---------- responsive ---------- */
+  /* ---------- TOP CONTACT BAR ---------- */
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(to bottom, rgba(26, 20, 25, 0.92) 0%, rgba(26, 20, 25, 0.7) 70%, transparent 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .topbar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    border: 1px solid transparent;
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .topbar a:hover {
+    color: var(--amber);
+    border-color: var(--line);
+    background: var(--bg-soft);
+  }
+
+  .topbar svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* phone: hidden label, revealed on hover */
+  .topbar .phone .phone-label {
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    transition: max-width 0.45s ease, opacity 0.3s ease, margin-left 0.45s ease;
+    margin-left: 0;
+  }
+
+  .topbar .phone:hover .phone-label,
+  .topbar .phone:focus .phone-label {
+    max-width: 180px;
+    opacity: 1;
+    margin-left: 0.15rem;
+  }
+
+  .topbar .phone::after {
+    content: 'hover';
+    font-size: 0.65rem;
+    color: var(--ink-dim);
+    letter-spacing: 0.1em;
+    transition: opacity 0.25s ease, max-width 0.35s ease;
+    max-width: 60px;
+    overflow: hidden;
+  }
+  .topbar .phone:hover::after,
+  .topbar .phone:focus::after { opacity: 0; max-width: 0; }
+
+
   @media (max-width: 560px) {
-    main { padding: 4rem 1.5rem 4rem; }
+    main { padding: 4.5rem 1.5rem 4rem; }
     .skills-block { padding: 1.5rem 1.25rem; font-size: 0.75rem; }
     .skill-row { flex-direction: column; gap: 0; margin-bottom: 0.5rem; }
     .skill-key { min-width: 0; }
+    .topbar { padding: 0.7rem 0.6rem; gap: 0.2rem; flex-wrap: wrap; }
+    .topbar a { padding: 0.4rem 0.6rem; font-size: 0.65rem; }
+    .topbar .phone::after { display: none; }
   }
 
   /* gentle fade-in */
@@ -328,6 +408,25 @@
 </style>
 </head>
 <body>
+
+<nav class="topbar" aria-label="contact links">
+  <a href="mailto:sarjamisepehr@gmail.com" aria-label="email">
+    <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+    <span>email</span>
+  </a>
+  <a href="https://github.com/sarjaamisepehr" target="_blank" rel="noopener" aria-label="github">
+    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.82.1-.65.35-1.08.63-1.33-2.22-.25-4.55-1.1-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.7.11 2.5.34 1.9-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.69 0 3.85-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+    <span>github</span>
+  </a>
+  <a href="https://www.linkedin.com/in/sepehr-sarjaami/" target="_blank" rel="noopener" aria-label="linkedin">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7.5v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>
+    <span>linkedin</span>
+  </a>
+  <a class="phone" href="tel:+393515890620" aria-label="phone (hover to reveal)" tabindex="0">
+    <svg viewBox="0 0 24 24"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+    <span class="phone-label">+39 351 589 0620</span>
+  </a>
+</nav>
 
 <main>
 
@@ -446,8 +545,7 @@
     <div class="contact-grid">
       <a href="mailto:sarjamisepehr@gmail.com">sarjamisepehr@gmail.com</a>
       <a href="https://github.com/sarjaamisepehr" target="_blank" rel="noopener">github</a>
-      <a href="https://www.linkedin.com/in/sepehr-sarjami" target="_blank" rel="noopener">linkedin</a>
-      <a href="tel:+393515890620">+39 351 589 0620</a>
+      <a href="https://www.linkedin.com/in/sepehr-sarjaami/" target="_blank" rel="noopener">linkedin</a>
     </div>
   </section>
 
